@@ -1,17 +1,624 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-mx">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name='description'
+    content='Feria Internacional del Libro del Tribunal Electoral del Poder Judicial de la Federación.'>
+  <title>7o Seminario de la Red de Bibliotecas del Poder Judicial de la Federación</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/site.css" asp-append-version="true" />
+  <script src='lib/parallax/parallax.min.js'></script>
+  <style>
+    .parallax {
+      position: relative;
+    }
+
+    .parallax-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .parallax-layer>img {
+      display: block;
+      width: 100%;
+      max-height: 100vh;
+    }
+
+    #parallax {
+      /*background-image: url(img/bg.jpg);*/
+      background-color: #ffffff !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23f2f2f2' fill-opacity='0.4' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 500px !important;
+      box-shadow: 0 0 .625rem -.1875rem rgba(0, 0, 0, .2) !important;
+    }
+  </style>
 </head>
 
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
+  <main id="main" role="main">
+    <header class="header navbar navbar-expand-lg navbar-dark navbar-floating navbar-sticky">
+      <div class="container px-0 px-xl-3">
+        <button class="navbar-toggler ms-n2 me-2" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#primaryMenu">
+          <span class="navbar-toggler-icon">&empty;</span>
+        </button>
+        <a class="navbar-brand flex-shrink-0 order-lg-1 mx-auto ms-xl-0 pe-xl-2 me-xl-4" asp-area=""
+          asp-controller="Home" asp-action="">
+          <img class="navbar-floating-logo d-none d-lg-block" src="img/logo-light.svg" alt="TEPJF" height="64">
+          <img class="navbar-stuck-logo" src="img/logo-dark.svg" alt="TEPJF" height="64">
+          <img class="navbar-icon d-lg-none" src="img/logo-icon.svg" alt="TEPJF" height="64">
+        </a>
+        <div class="d-flex align-items-center order-lg-3 ms-lg-auto">
+
+        </div>
+        <div class="offcanvas offcanvas-collapse order-lg-2" id="primaryMenu">
+          <div class="offcanvas-header navbar-shadow">
+            <h5 class="mt-1 mb-0">Menú</h5>
+            <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown dropdown-mega">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Programa</a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-column">
+                    <a class="dropdown-item" href="#Seccion01">15 de noviembre</a>
+                    <a class="dropdown-item" href="#Seccion02">16 de noviembre</a>
+                    <a class="dropdown-item" href="#Seccion03">17 de noviembre</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section id="parallax"
+      class="d-flex align-items-center position-relative bg-dark bg-size-cover bg-position-center overflow-hidden">
+      <div class="container-xxl">
+        <div class="row justify-content-center align-items-center min-vh-100">
+          <div class="col-xl-7 col-lg-6 d-flex justify-content-xl-end justify-content-center vh-sm-50 vh-lg-100">
+            <div class="parallax ms-lg-n5" style="max-width: 920px;">
+              <div class="parallax-layer" data-depth="0.20">
+                <img src="img/layer07.png" alt="Layer">
+              </div>
+              <div class="parallax-layer" data-depth="0.70">
+                <img src="img/layer06.png" alt="Layer">
+              </div>
+              <div class="parallax-layer" data-depth="0.2">
+                <img src="img/layer05.png" alt="Layer">
+              </div>
+              <div class="parallax-layer" data-depth="0.1">
+                <img src="img/layer04.png" alt="Layer">
+              </div>
+              <div class="parallax-layer" data-depth="0.25">
+                <img src="img/layer03.png" alt="Layer">
+              </div>
+              <div class="parallax-layer" data-depth="0.75">
+                <img src="img/layer02.png" alt="Layer">
+              </div>
+              <div class="parallax-layer" data-depth="0.1">
+                <img src="img/layer01.png" alt="Layer">
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-12 vh-sm-50 vh-lg-100" style="z-index:2">
+            <div class="pt-2 mx-auto mb-5 mb-lg-0 ms-xl-0 text-center text-xl-start">
+              <h1 class="display-6 fw-bold pb-2">
+                7.º Seminario de la Red de Bibliotecas
+                <span class="fw-light">
+                  del Poder Judicial de la Federación
+                </span>
+              </h1>
+              <h2 class="fw-light line-height-base" style="color:#24135F">
+                Preservación y recuperación temática de la información en el entorno digital
+              </h2>
+            </div>
+            <hr class="border" />
+            <div class="local-scroll text-center text-lg-ceter my-2">
+              <a id="more" href="#Seccion01" class="btn scroll-down px-3">
+                <span class="display-6 fs-3 px-3">Mas información</span>
+                <i class="bi bi-caret-down-fill"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="shadow" style="background-color: hsl(250deg 10% 90%);">
+      <div class="container-lg">
+        <div class="row p-5">
+          <a class="col-2" href="//scjn.gob.mx/" target="_blank">
+            <img title="scjn" class="img-thumbnail" src="img/instituciones/scjn-logo.png" />
+          </a>
+          <a class="col-2" href="//te.gob.mx/" target="_blank">
+            <img title="tepjf" class="img-thumbnail" src="img/instituciones/tepjf-logo.png" />
+          </a>
+          <a class="col-2" href="//cjf.gob.mx/" target="_blank">
+            <img title="cjf" class="img-thumbnail" src="img/instituciones/cjf-logo.png" />
+          </a>
+          <a class="col-2" href="//ijf.cjf.gob.mx/#biblioteca" target="_blank">
+            <img title="effj" class="img-thumbnail" src="img/instituciones/effj-logo.png" />
+          </a>
+          <a class="col-2" href="//ifdp.cjf.gob.mx/index.htm#Biblioteca" target="_blank">
+            <img title="ifdp" class="img-thumbnail" src="img/instituciones/ifdp-logo.png" />
+          </a>
+          <a class="col-2" href="//ifecom.cjf.gob.mx/paginas/servicios.htm?pageName=servicios%2Fbiblioteca.htm"
+            target="_blank">
+            <img title="ifecom" class="img-thumbnail" src="img/instituciones/ifecom-logo.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <section id="Seccion01">
+      <div class="container-lg py-5 py-lg-7" style="color: #24135F;">
+        <div class="mb-5">
+          <h2 class="display-6 mb-4 p-3 pt-5" style="background-color: hsl(250deg 75% 15%/75%); color: #fff;">
+            15 de noviembre
+          </h2>
+          <div class="row">
+            <div class="col-2">
+              <strong>10:00 a 10:15 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Acto de inauguración</strong>
+              </p>
+              <h5 class="m-0">
+                Lic. María Adriana Campollo Lagunes
+              </h5>
+              <p>
+                Directora General del Centro de Documentación y Análisis, Archivos y Compilación de Leyes de la Suprema
+                Corte de Justicia de la Nación (SCJN) y Presidenta de la Comisión de la Red de Bibliotecas del Poder
+                Judicial de la Federación.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>10:15 a 11:05 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Conferencia magistral:</strong> Evolución de directrices internacionales sobre la preservación
+                del patrimonio digital.
+              </p>
+              <h5 class="m-0">
+                Dr. Daniel Sanabria
+              </h5>
+              <p>
+                Bibliotecas de CETYS Universidad.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Presentadora:
+              </h5>
+              <h5 class="m-0">
+                Lic. África Barrales Alcalá
+              </h5>
+              <p>
+                Instituto Federal de Defensoría Pública, Consejo de la Judicatura Federal (CJF).
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>11:05 a 11:15 horas</strong>
+            </div>
+            <div class="col-10">
+              <p>Receso</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>11:15 a 12:45 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Mesa redonda:</strong> La gestión y conservación de los objetos digitales.
+              </p>
+              <h5 class="m-0">
+                Mtra. Alicia Barnard Amozurrutia
+              </h5>
+              <p>
+                TEAM México, Proyecto InterPARES.
+              </p>
+              <h5 class="m-0">
+                Ing. Miguel Ángel Gasca Gómez
+              </h5>
+              <p>
+                Biblioteca Nacional de Antropología e Historia.
+              </p>
+              <h5 class="m-0">
+                Dr. Juan Voutssás Márquez
+              </h5>
+              <p>
+                Instituto de Investigaciones Bibliotecológicas y de la Información, Universidad Nacional Autónoma de
+                México (UNAM).
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Moderadora:
+              </h5>
+              <h5 class="m-0">
+                Dra. María Guadalupe Vega Díaz
+              </h5>
+              <p>
+                Asociación Mexicana de Bibliotecarios, A.C.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>12:45 a 12:55 horas</strong>
+            </div>
+            <div class="col-10">
+              <p>Receso</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>12:55 a 14:25 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Mesa redonda:</strong> Repositorios institucionales para la preservación de la información.
+              </p>
+              <h5 class="m-0">
+                Mtra. Rosalina Vázquez Tapia
+              </h5>
+              <p>
+                Universidad Autónoma de San Luis Potosí y Red Mexicana de Repositorios Institucionales.
+              </p>
+              <h5 class="m-0">
+                Mtra. Armida Guadalupe Escalante Ilizaliturri
+              </h5>
+              <p>
+                Colegio de Bibliotecología de la Facultad de Filosofía y Letras, UNAM.
+              </p>
+              <h5 class="m-0">
+                Mtro. Alberto Castro Thompson
+              </h5>
+              <p>
+                Instituto de Investigaciones Bibliográficas, UNAM.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Moderadora:
+              </h5>
+              <h5 class="m-0">
+                Ing. Margarita Roldán Sánchez
+              </h5>
+              <p>
+                Dirección General de Tecnologías de la Información, SCJN.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="Seccion02">
+      <div class="container-lg py-5 py-lg-7" style="color: #24135F;">
+        <div class="mb-5">
+          <h2 class="display-6 mb-4 p-3 pt-5" style="background-color: hsl(250deg 75% 15%/75%); color: #fff;">
+            16 de noviembre
+          </h2>
+          <div class="row">
+            <div class="col-2">
+              <strong>10:00 a 11:30 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Mesa redonda:</strong> Experiencias en la preservación digital.
+              </p>
+              <h5 class="m-0">
+                Dra. Tila María Pérez Ortiz
+              </h5>
+              <p>
+                Dirección General de Repositorios Universitarios, UNAM.
+              </p>
+              <h5 class="m-0">
+                Lic. Roberto Aguirre Bello
+              </h5>
+              <p>
+                Biblioteca Nacional de Chile.
+              </p>
+              <h5 class="m-0">
+                Mtra. Reyna Martha Arlin López Hernández
+              </h5>
+              <p>
+                Dirección General de la Memoria Histórica de México.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Moderador:
+              </h5>
+              <h5 class="m-0">
+                Mtro. Juan Luis Carrillo García
+              </h5>
+              <p>
+                Centro de Documentación de la Dirección General de Documentación, Tribunal Electoral del Poder Judicial
+                de la Federación.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>11:30 a 11:40 horas</strong>
+            </div>
+            <div class="col-10">
+              <p>Receso</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>11:40 a 12:30 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Conferencia magistral:</strong> Sistemas de Organización del Conocimiento: ¿Taxonomías,
+                Tesauros, Ontologías?
+              </p>
+              <h5 class="m-0">
+                Dr. Miguel Ángel Marzal García-Quismondo
+              </h5>
+              <p>
+                Universidad Carlos III de Madrid, España.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Presentadora:
+              </h5>
+              <h5 class="m-0">
+                Lic. Efraín Guzmán Peña
+              </h5>
+              <p>
+                Instituto Federal de Especialistas de Concursos Mercantiles, CJF.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>12:30 a 12:40 horas</strong>
+            </div>
+            <div class="col-10">
+              <p>Receso</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>12:40 a 14:10 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Mesa redonda:</strong> Organización, identificación y localización de recursos digitales.
+              </p>
+              <h5 class="m-0">
+                Dra. Adriana Suárez Sánchez
+              </h5>
+              <p>
+                Instituto de Investigaciones Bibliotecológicas y de Información, UNAM.
+              </p>
+              <h5 class="m-0">
+                Lic. Jimena Escobar Sotomayor
+              </h5>
+              <p>
+                Mediateca, Instituto Nacional de Antropología e Historia.
+              </p>
+              <h5 class="m-0">
+                Lic. Otilio Esteban Hernández Pérez
+              </h5>
+              <p>
+                Unidad General de Administración del Conocimiento Jurídico, SCJN.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Moderador:
+              </h5>
+              <h5 class="m-0">
+                Lic. Rubén Jiménez Blancas
+              </h5>
+              <p>
+                Tribunal Electoral del Poder Judicial de la Federación.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="Seccion03">
+      <div class="container-lg py-5 py-lg-7" style="color: #24135F;">
+        <div class="mb-5">
+          <h2 class="display-6 mb-4 p-3 pt-5" style="background-color: hsl(250deg 75% 15%/75%); color: #fff;">
+            17 de noviembre
+          </h2>
+          <div class="row">
+            <div class="col-2">
+              <strong>10:00 a 11:30 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Mesa redonda:</strong> Tesauro y lenguaje incluyente. Revertir la invisibilización documental.
+              </p>
+              <h5 class="m-0">
+                Dra. Camelia Romero Millán
+              </h5>
+              <p>
+                Centro de Estudios de Género y Centro de Estudios Sociológicos, El Colegio de México.
+              </p>
+              <h5 class="m-0">
+                MLIS Amber Billey
+              </h5>
+              <p>
+                Bard Collage y Homosaurus, Estados Unidos.
+              </p>
+              <h5 class="m-0">
+                Dra. Blanca Rodríguez Bravo
+              </h5>
+              <p>
+                Universidad de León, España.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Moderadora:
+              </h5>
+              <h5 class="m-0">
+                Mtra. Mariel Velázquez de Landa
+              </h5>
+              <p>
+                Unidad General de Igualdad de Género, SCJN.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>11:30 a 11:40 horas</strong>
+            </div>
+            <div class="col-10">
+              <p>Receso</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>11:40 a 13:10 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Mesa redonda:</strong> Tesauros jurídicos y recuperación de la información. Experiencias
+                comunes.
+              </p>
+              <h5 class="m-0">
+                Lic. Mabel Fernández Castro
+              </h5>
+              <p>
+                Tesauro de la Corte Interamericana de Derechos Humanos.
+              </p>
+              <h5 class="m-0">
+                Dr. Luis Pomed Sánchez
+              </h5>
+              <p>
+                Servicio de Doctrina Constitucional, Tribunal Constitucional de España.
+              </p>
+              <h5 class="m-0">
+                Abogada Silvia Ciavelli
+              </h5>
+              <p>
+                Tesauro del Sistema Argentino de Información Jurídica de Derecho Argentino.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Moderador:
+              </h5>
+              <h5 class="m-0">
+                Lic. Otilio Esteban Hernández Pérez
+              </h5>
+              <p>
+                Unidad General de Administración del Conocimiento Jurídico, SCJN.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>13:10 a 13:20 horas</strong>
+            </div>
+            <div class="col-10">
+              <p>Receso</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>13:20 a 14:10 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Conferencia magistral:</strong> Sistemas de organización del conocimiento para el ejercicio del
+                derecho de acceso a la justicia.
+              </p>
+              <h5 class="m-0">
+                Lic. Ana Karina Castolo Rodríguez
+              </h5>
+              <p>
+                Dirección General de Estrategia y Transformación Digital, CJF.
+              </p>
+              <h5 class="m-0" style="color:#888">
+                Presentadora:
+              </h5>
+              <h5 class="m-0">
+                Mtra. Alma Medellín Luque
+              </h5>
+              <p>
+                Centro de Documentación y Análisis, Archivos y Compilación de Leyes, SCJN.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-2">
+              <strong>14:10 a 14:25 horas</strong>
+            </div>
+            <div class="col-10">
+              <p class="fs-4" style="color: #992F87">
+                <strong>Acto de clausura</strong>
+              </p>
+              <h5 class="m-0">
+                Lic. Agustín Millán Gómez
+              </h5>
+              <p>
+                Director General de Documentación del Tribunal Electoral del Poder Judicial de la Federación y Vocal de
+                la Comisión de la Red de Bibliotecas del Poder Judicial de la Federación.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+  <a class="btn-scroll-top d-inline-flex align-items-center text-decoration-none" href="#main" title="arriba">
+    <span class="btn-scroll-top-tooltip me-3 text-light fw-medium">Arriba</span>
+    <span class="btn-scroll-top-icon btn btn-icon rounded-circle border-light flex-shrink-0 px-3"><i
+        class="h4 text-light my-1 bi bi-caret-up-fill"></i></span>
+  </a>
+  <footer class="footer bg-dark py-5 py-md-6 py-lg-7">
+    <div class="text-center text-white">
+      <p class="p-2 m-0">
+        Red de Bibliotecas del Poder Judicial de la Federación<br />
+        <a class="text-white" href="mailto:redbibliotecaspjf@mail.scjn.gob.mx"
+          target="_blank">redbibliotecaspjf@mail.scjn.gob.mx</a>, <a rel="noopener" class="text-white"
+          href="https://www.reddebibliotecas.pjf.gob.mx/"
+          target="_blank">https://www.reddebibliotecas.pjf.gob.mx/</a><br />
+        Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="js/site.js" asp-append-version="true"></script>
+  <script>
+    !function () {
+      "use strict";
+      for (var e = document.querySelectorAll(".parallax"), t = 0; t < e.length; t++) {
+        new Parallax(e[t]);
+      }
+    }();
+    $(document).ready(function () {
+      $("#current").modal('show');
+    });
+  </script>
 </body>
 
 </html>
